@@ -1,4 +1,4 @@
-name: Build Gemini CLI Executable
+name: Build Gemini GUI Executable
 
 on:
   push:
@@ -25,10 +25,10 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --name gemini gemini_cli.py
+	pyinstaller --noconsole --onefile --name "GeminiDesktop" gemini_gui.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: gemini-executable
-        path: dist/gemini.exe
+        name: gemini-desktop
+        path: dist/gemini_desktop.exe
