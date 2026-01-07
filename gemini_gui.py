@@ -1,10 +1,27 @@
 import os
-import sys
 import threading
 import customtkinter as ctk
 from tkinterdnd2 import DND_FILES, TkinterDnD
 from google import genai
 import speech_recognition as sr
+
+# Corrected Wrapper for CustomTkinter + DnD
+class GeminiApp(ctk.CTk, TkinterDnD.DnDWrapper):
+    def __init__(self):
+        # Initialize the CustomTkinter window
+        super().__init__()
+        
+        # Manually initialize the DnD wrapper logic
+        self.TkdndVersion = TkinterDnD._load_tkdnd(self.tk)
+
+        self.title("Gemini Pro Command Center")
+        self.geometry("1000x700")
+        
+        # --- Drag and Drop Registration ---
+        self.drop_target_register(DND_FILES)
+        self.dnd_bind('<<Drop>>', self.handle_drop)
+
+        # Rest of your UI code follows...import os
 
 # Integrating TkinterDnD with CustomTkinter
 class Tk(ctk.CTk, TkinterDnD.DnDWrapper):
